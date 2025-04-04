@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Traffic Visualizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Include Three.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Optional: Include OrbitControls for interaction -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+    <!-- Include Chart.js adapter for date/time -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@2.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+</head>
+<body>
+    <div id="container"></div>
+    <div id="info">
+        <h2>Real-time Traffic</h2>
+
+        <!-- Activity Plot Section -->
+        <div id="activity-plot">
+             <h3>Activity (Requests/sec)</h3>
+             <canvas id="activityChart"></canvas>
+        </div>
+         <hr style="margin: 20px 0;"> <!-- Add a separator -->
+
+        <div id="top-countries">
+            <h3>Top 10 Countries:</h3>
+            <ul id="countries-list">
+                <!-- Top countries will be populated here -->
+            </ul>
+        </div>
+        <div id="stats">
+             <h3>Stats:</h3>
+             <p>Total points displayed: <span id="points-count">0</span></p>
+             <p>Suspicious packets: <span id="suspicious-count">0</span></p>
+        </div>
+    </div>
+    <!-- Our Three.js logic -->
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html> 

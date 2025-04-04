@@ -1,0 +1,28 @@
+# Dockerfile.backend
+FROM python:3.9-slim
+
+WORKDIR /app
+
+# Copy backend requirements and code
+COPY requirements.txt .
+COPY app.py .
+
+# Install backend dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy frontend files
+COPY templates ./templates
+COPY static ./static
+# IMPORTANT: You need to add an actual 'earthmap.jpg' file
+# to the 'static' directory in your project for the globe texture.
+# Example: COPY static/earthmap.jpg ./static/earthmap.jpg
+
+# Expose the port Flask will run on
+EXPOSE 5000
+
+# Command to run the Flask app
+# Using gunicorn is recommended for production, but flask run is fine for this.
+CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
+
+# Alternatively, for gunicorn (install it via requirements.txt first):
+# CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"] 

@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: web_traffic_backend
+    ports:
+      - "5001:5000" # Map host port 5001 to container port 5000
+    volumes:
+      # Optional: Mount for development to see code changes without rebuilding
+      # - ./app.py:/app/app.py
+      # - ./templates:/app/templates
+      # - ./static:/app/static
+      # Add the earthmap.jpg here if you mount volumes
+      - ./static/earthmap.jpg:/app/static/earthmap.jpg # Make sure map is copied
+    networks:
+      - trafficnet
+
+  sender:
+    build:
+      context: .
+      dockerfile: Dockerfile.sender
+    container_name: web_traffic_sender
+    depends_on:
+      - backend # Wait for backend to be ready (basic check, might need wait-for-it script)
+    environment:
+      # Set the URL for the sender to find the backend service
+      BACKEND_URL: http://backend:5000
+    volumes:
+        # Mount the data file
+        - ./ip_addresses.csv:/app/ip_addresses.csv
+    networks:
+      - trafficnet
+    # Optional: Restart policy if needed
+    # restart: on-failure
+
+networks:
+  trafficnet:
+    driver: bridge 

@@ -1,0 +1,65 @@
+body {
+    margin: 0;
+    overflow: hidden; /* Prevent scrollbars from Three.js */
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex; /* Use flexbox for layout */
+}
+
+#container {
+    width: 75%; /* Visualization takes most of the width */
+    height: 100vh; /* Full viewport height */
+    background-color: #000; /* Black background for the globe */
+}
+
+#info {
+    width: 25%; /* Info panel takes the rest */
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box; /* Include padding in width */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    background-color: #fff;
+    border-left: 1px solid #ccc;
+}
+
+#info h2, #info h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+#locations-list {
+    list-style: none;
+    padding: 0;
+}
+
+#locations-list li {
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+#stats p {
+     margin-bottom: 8px;
+     color: #555;
+}
+
+#stats span {
+    font-weight: bold;
+    color: #000;
+}
+
+/* Style for the activity chart container div */
+#activity-plot {
+    /* Remove relative positioning and padding */
+    height: 280px; /* Keep container height (includes title + chart space) */
+    width: 100%;   /* Take available width */
+    /* Let h3 and canvas flow naturally */
+}
+
+/* Style for the activity chart canvas */
+#activityChart {
+    /* Remove absolute positioning */
+    display: block; /* Ensure it's treated as a block element */
+    height: 240px; /* Explicitly set canvas height (adjust as needed, e.g. 280px container - 40px for title/margins) */
+    width: 100%;  /* Take available width */
+} 
